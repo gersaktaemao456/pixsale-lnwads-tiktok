@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /app/
-Disallow: /admin
-Disallow: /login
-Disallow: /p/?preview=1
