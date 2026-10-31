@@ -4,6 +4,10 @@
 
   var P = window.PIX;
   var GH = window.PIXGH;
+  var LEGACY_REPOS = {
+    "pixsale-lnwads-tiktokPgk": true,
+    "lnwadstiktokpixsale": true
+  };
 
   function clone(v) {
     return JSON.parse(JSON.stringify(v));
@@ -79,7 +83,14 @@
 
     github: function () {
       var cfg = readJSON(P.keys.github, null);
-      return cfg && cfg.token ? cfg : null;
+      if (!cfg || !cfg.token) return null;
+      // Repair repository names saved by earlier builds or manual typos.
+      // Publishing must land in the same repository the public page reads.
+      if (cfg.owner === P.repo.owner && LEGACY_REPOS[cfg.repo]) {
+        cfg.repo = P.repo.name;
+        writeJSON(P.keys.github, cfg);
+      }
+      return cfg;
     },
 
     githubPublic: function () {
