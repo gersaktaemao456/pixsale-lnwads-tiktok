@@ -1,0 +1,111 @@
+{
+  "id": "nt55-creator",
+  "slug": "nt55-creator",
+  "title": "ณภัทร — ลิงก์ทั้งหมด",
+  "brand": "Nt55",
+  "status": "published",
+  "template": "bio",
+  "theme": {
+    "accent": "#0f0f0f",
+    "mode": "dark",
+    "font": "sans"
+  },
+  "seo": {
+    "title": "Nt55 — ของใช้ในบ้านที่ใช้จริง",
+    "description": "รวมลิงก์ร้านค้า ช่องทางติดต่อ และคลิปรีวิวของณภัทร"
+  },
+  "stats": {
+    "views": 8940,
+    "clicks": 1560
+  },
+  "createdAt": "2026-08-11T14:00:00+07:00",
+  "updatedAt": "2026-10-28T21:17:52.212Z",
+  "blocks": [
+    {
+      "id": "hero_5ubkux9",
+      "type": "hero",
+      "props": {
+        "kicker": "nt55",
+        "title": "Nt55",
+        "titleAccent": "ยูสใหม่ ของใช้ในบ้านที่ฉันใช้จริง",
+        "subtitle": "รีวิวลูกค้าทางบ้าน ๆ แบบไม่ต้องเติมเยอะ — ทุกรายการที่แนะนำคือระบบที่มั่นคง",
+        "image": "https://pbs.twimg.com/media/HVlcs90bQAAijI4?format=jpg&name=small",
+        "imageAlt": "Nt55",
+        "avatar": true,
+        "ctaText": "แอดมินสมัครให้",
+        "ctaUrl": "https://t.co/YR9U8A8Pca",
+        "trust": [
+          "TikTok 128K",
+          "รีวิว 240 คลิป",
+          "ตอบทุกข้อความ"
+        ],
+        "badge": "100รับ200"
+      }
+    },
+    {
+      "id": "faq_din5s61",
+      "type": "faq",
+      "props": {
+        "title": "คำถามที่พบบ่อย",
+        "items": [
+          {
+            "q": "คำถาม",
+            "a": "คำตอบ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "links_hwxlhtv",
+      "type": "links",
+      "props": {
+        "title": "ลิงก์ทั้งหมด",
+        "items": [
+          {
+            "icon": "tiktok",
+            "label": "TikTok — คลิปรีวิวล่าสุด",
+            "sub": "@nt55.home",
+            "url": "https://line.me/R/ti/p/~@368gqehu"
+          },
+          {
+            "icon": "line",
+            "label": "LINE OA — สอบถามNT55",
+            "sub": "@nt55.home",
+            "url": "https://line.me/R/ti/p/~@368gqehu"
+          },
+          {
+            "icon": "youtube",
+            "label": "YouTube — รีวิวแบบยาว",
+            "sub": "ทุกวันอาทิตย์",
+            "url": "https://line.me/R/ti/p/~@368gqehu"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta_79yrvgt",
+      "type": "cta",
+      "props": {
+        "title": "อยากให้รีวิวการเล่น?",
+        "subtitle": "ส่งรายละเอียดและช่วงเวลาที่ต้องการได้เลย",
+        "buttonText": "ติดต่อแอดมิน",
+        "buttonUrl": "https://line.me/R/ti/p/~@368gqehu",
+        "note": "รับเฉพาะลูกค้าใหม่ที่ตรงกับไลฟ์สไตล์ของช่อง"
+      }
+    },
+    {
+      "id": "foot_cfwtjf2",
+      "type": "footer",
+      "props": {
+        "note": "뿯½ 2026 Napat 뿯½ ลิงก์ทั้งหมดในหน้าเดียว",
+        "showBadge": true
+      }
+    }
+  ],
+  "tracking": {
+    "facebookPixelId": "",
+    "lineTagId": "",
+    "tiktokPixelId": ""
+  },
+  "customCss": ".ps-h1 { letter-spacing: -0.018em; }\n.ps-cta { border-radius: 16px; }\n.ps-hero-media { border-radius: 24px; }"
+}
