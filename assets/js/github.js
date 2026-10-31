@@ -41,7 +41,7 @@
     if (!err) return "เกิดข้อผิดพลาดที่ไม่รู้จัก";
     if (err.status === 401) return "Token ไม่ถูกต้องหรือหมดอายุ — ตรวจสอบ Personal Access Token อีกครั้ง";
     if (err.status === 403) return "Token ไม่มีสิทธิ์เขียน repo นี้ — ต้องให้สิทธิ์ Contents: Read and write";
-    if (err.status === 404) return "ไม่พบ repo หรือ path นี้ — ตรวจชื่อ owner / repo / branch";
+    if (err.status === 404) return "ไม่พบ repo หรือ token ไม่มีสิทธิ์เข้าถึง repo นี้ — ตรวจชื่อ owner/repo และเลือก repo ใน fine-grained token";
     if (err.status === 409 && /empty/i.test(String(err.message || ""))) return "repo ยังว่าง — กด “อัปโหลดทุกหน้าขึ้น GitHub” เพื่อสร้างไฟล์แรก";
     if (err.status === 409 || err.status === 422) return "ไฟล์ถูกแก้ไขจากที่อื่น — กดซิงก์อีกครั้งเพื่อรวมข้อมูลล่าสุด";
     if (err.status === 429) return "เรียก GitHub ถี่เกินไป — รอสักครู่แล้วลองใหม่";

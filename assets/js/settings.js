@@ -127,10 +127,10 @@
     btn.textContent = "กำลังทดสอบ…";
     setHint("กำลังตรวจสอบสิทธิ์กับ GitHub…");
     GH.test(cfg).then(function (repo) {
-      setHint("เชื่อมต่อได้: " + repo.fullName + " · branch " + repo.branch + (repo.private ? " · repo เป็น private (หน้าเว็บสาธารณะจะอ่าน raw ไม่ได้)" : " · public"), repo.private ? "err" : "ok");
+      setHint("เชื่อมต่อได้: " + repo.fullName + " · branch " + repo.branch + (repo.private ? " · private — หน้า public จะอ่านข้อมูลไม่ได้ แนะนำให้ใช้ repo public" : " · public"), repo.private ? "err" : "ok");
       U.toast("เชื่อมต่อ GitHub ได้", repo.fullName, "ok");
     }).catch(function (err) {
-      setHint(GH.friendly(err), "err");
+      setHint("ทดสอบไม่สำเร็จ (" + cfg.owner + "/" + cfg.repo + "): " + GH.friendly(err), "err");
       U.toast("ทดสอบไม่สำเร็จ", GH.friendly(err), "err");
     }).then(function () {
       btn.disabled = false;
@@ -148,9 +148,8 @@
     btn.disabled = true;
     btn.textContent = "กำลังเชื่อมต่อ…";
     GH.test(cfg).then(function (repo) {
-      if (repo.private) {
-        return Promise.reject(new Error("repo เป็น private — หน้าเว็บที่เผยแพร่จะโหลดข้อมูลไม่ได้หากไม่แนบ token"));
-      }
+      // A private repo can still be used for editing; only public sales pages
+      // cannot read raw JSON without a token. Warn instead of blocking.
       // Always follow the repository's real default branch; an empty repo has
       // no "main" ref yet, so this is what makes the first commit possible.
       if (repo.branch) {
@@ -166,10 +165,11 @@
       });
     }).then(function (repo) {
       updateGHUI();
-      setHint("เชื่อมต่อและบันทึกแล้ว: " + repo.fullName, "ok");
-      U.toast("เชื่อมต่อ GitHub แล้ว", repo.fullName + " · พร้อมซิงก์ข้อมูล", "ok");
+      var warn = repo.private ? " · private (หน้า public อ่านไม่ได้)" : "";
+      setHint("เชื่อมต่อและบันทึกแล้ว: " + repo.fullName + warn, repo.private ? "err" : "ok");
+      U.toast("เชื่อมต่อ GitHub แล้ว", repo.fullName + (repo.private ? " · private" : " · พร้อมซิงก์ข้อมูล"), repo.private ? "err" : "ok");
     }).catch(function (err) {
-      setHint(GH.friendly(err), "err");
+      setHint("เชื่อมต่อไม่สำเร็จ (" + cfg.owner + "/" + cfg.repo + "): " + GH.friendly(err), "err");
       U.toast("เชื่อมต่อไม่สำเร็จ", GH.friendly(err), "err");
     }).then(function () {
       btn.disabled = false;

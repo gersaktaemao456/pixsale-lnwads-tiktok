@@ -142,7 +142,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
                   </button>
                 </div>
-                <span class="hint">สิทธิ์ที่ต้องใช้: <b>Contents — Read and write</b> เฉพาะ repo นี้ · token ถูกเก็บใน localStorage ของเบราว์เซอร์และไม่ถูก commit</span>
+                <span class="hint">สิทธิ์ที่ต้องใช้: <b>Contents — Read and write</b> เฉพาะ repo นี้ · token ถูกเก็บใน localStorage ของเบราว์เซอร์และไม่ถูก commit · <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">สร้าง token ใหม่</a> · อย่าแชร์ภาพหน้าจอที่มี token</span>
               </div>
               <div class="inline-note" id="ghHint"></div>
             </div>
@@ -204,7 +204,7 @@
           <div class="card" style="background:var(--ink);color:var(--paper);border-color:var(--ink)">
             <div class="card-body">
               <p class="eyebrow" style="color:var(--muted)">ความเป็นส่วนตัว</p>
-              <p style="font-size:12.5px;line-height:1.7;margin-top:8px;color:var(--ink-dim)">PIXSALE ไม่มีเซิร์ฟเวอร์กลาง ไม่ส่งข้อมูลร้านของคุณไปที่ใด นอกจาก GitHub ที่คุณเลือก</p>
+              <p style="font-size:12.5px;line-height:1.7;margin-top:8px;color:var(--ink-dim)">PIXSALE ใช้เซิร์ฟเวอร์กลางเฉพาะการยืนยันสิทธิ์และออก license — ไม่เก็บเนื้อหาเซลเพจหรือข้อมูลร้านของคุณ ข้อมูลร้านยังอยู่ใน GitHub ที่คุณเลือก และ token GitHub อยู่ในเบราว์เซอร์ของคุณ</p>
             </div>
           </div>
         </aside>
@@ -216,11 +216,11 @@
 <div class="toasts" aria-live="polite"></div>
 
 <script src="/assets/js/config.js"></script>
-<script src="/assets/js/github.js"></script>
+<script src="/assets/js/github.js?v=20261031b"></script>
 <script src="/assets/js/seed.js"></script>
 <script src="/assets/js/store.js"></script>
 <script src="/assets/js/ui.js"></script>
-<script src="/assets/js/settings.js"></script>
+<script src="/assets/js/settings.js?v=20261031b"></script>
 <script src="/assets/js/auth.js"></script>
 </body>
 </html>
