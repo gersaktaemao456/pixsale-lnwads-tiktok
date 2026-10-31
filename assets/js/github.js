@@ -116,6 +116,7 @@
           branch: repo.default_branch,
           private: repo.private,
           permissions: repo.permissions || null,
+          canPush: !!(repo.permissions && repo.permissions.push),
           htmlUrl: repo.html_url
         };
       });

@@ -6,6 +6,9 @@ window.PIX = {
     studio: "PIXSALE Studio",
     tagline: "เซลเพจมือถือ-first สำหรับคนขายบน TikTok"
   },
+  // The public storefront lives on its own domain. Studio (the private team
+  // workspace) must never hand out its own origin as a customer-facing link.
+  publicBase: "https://pixsale-lnwads-tiktok.vercel.app",
   paths: {
     data: "data",
     pages: "data/pages",
@@ -21,8 +24,8 @@ window.PIX = {
   // Public repository coordinates. Kept in data/site.json so visitors can read
   // freshly published pages straight from GitHub without a redeploy.
   repo: {
-    owner: "",
-    name: "",
+    owner: "gersaktaemao456",
+    name: "pixsale-lnwads-tiktok",
     branch: "main"
   },
   limits: {

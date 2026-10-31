@@ -127,8 +127,9 @@
     btn.textContent = "กำลังทดสอบ…";
     setHint("กำลังตรวจสอบสิทธิ์กับ GitHub…");
     GH.test(cfg).then(function (repo) {
-      setHint("เชื่อมต่อได้: " + repo.fullName + " · branch " + repo.branch + (repo.private ? " · private — หน้า public จะอ่านข้อมูลไม่ได้ แนะนำให้ใช้ repo public" : " · public"), repo.private ? "err" : "ok");
-      U.toast("เชื่อมต่อ GitHub ได้", repo.fullName, "ok");
+      var access = repo.canPush ? "เขียนได้" : "อ่านอย่างเดียว — ต้องให้ Contents: Read and write";
+      setHint("เชื่อมต่อได้: " + repo.fullName + " · branch " + repo.branch + (repo.private ? " · private" : " · public") + " · " + access, repo.canPush ? "ok" : "err");
+      U.toast("ทดสอบ GitHub แล้ว", repo.fullName + " · " + access, repo.canPush ? "ok" : "err");
     }).catch(function (err) {
       setHint("ทดสอบไม่สำเร็จ (" + cfg.owner + "/" + cfg.repo + "): " + GH.friendly(err), "err");
       U.toast("ทดสอบไม่สำเร็จ", GH.friendly(err), "err");
@@ -148,6 +149,9 @@
     btn.disabled = true;
     btn.textContent = "กำลังเชื่อมต่อ…";
     GH.test(cfg).then(function (repo) {
+      if (repo.permissions && repo.permissions.push === false) {
+        throw new Error("token มีสิทธิ์อ่านอย่างเดียว — ต้องให้ Contents: Read and write");
+      }
       // A private repo can still be used for editing; only public sales pages
       // cannot read raw JSON without a token. Warn instead of blocking.
       // Always follow the repository's real default branch; an empty repo has
@@ -157,23 +161,31 @@
         els.gBranch.value = repo.branch;
       }
       S.connect(cfg);
-      return S.pushSite().then(function () {
-        return repo;
-      }).catch(function (err) {
-        // The connection itself is valid; site.json may fail on empty repos/permissions.
-        return repo;
+      els.progress.textContent = "กำลังซิงก์หน้าเว็บทั้งหมด…";
+      return S.pushAll(function (done, total, slug) {
+        els.progress.textContent = "กำลังอัปโหลด " + done + "/" + total + " · " + slug;
+      }).then(function (res) {
+        if (!res.pushed) {
+          S.disconnect();
+          throw new Error("ซิงก์ไม่สำเร็จ — ตรวจสิทธิ์ Contents: Read and write");
+        }
+        return { repo: repo, res: res };
       });
-    }).then(function (repo) {
+    }).then(function (out) {
+      var repo = out.repo;
+      var res = out.res;
       updateGHUI();
-      var warn = repo.private ? " · private (หน้า public อ่านไม่ได้)" : "";
-      setHint("เชื่อมต่อและบันทึกแล้ว: " + repo.fullName + warn, repo.private ? "err" : "ok");
-      U.toast("เชื่อมต่อ GitHub แล้ว", repo.fullName + (repo.private ? " · private" : " · พร้อมซิงก์ข้อมูล"), repo.private ? "err" : "ok");
+      els.progress.textContent = "ซิงก์แล้ว " + res.pushed + "/" + res.total + " หน้า";
+      var warn = res.failed.length ? " · ล้มเหลว " + res.failed.length + " หน้า" : "";
+      setHint("เชื่อมต่อและซิงก์แล้ว: " + repo.fullName + " · " + res.pushed + "/" + res.total + " หน้า" + warn, res.failed.length ? "err" : "ok");
+      U.toast("เชื่อมต่อ GitHub แล้ว", res.pushed + "/" + res.total + " หน้า" + (res.failed.length ? " · ล้มเหลว " + res.failed.length : " · Vercel กำลังดีพลอย"), res.failed.length ? "warn" : "ok");
     }).catch(function (err) {
+      els.progress.textContent = "";
       setHint("เชื่อมต่อไม่สำเร็จ (" + cfg.owner + "/" + cfg.repo + "): " + GH.friendly(err), "err");
       U.toast("เชื่อมต่อไม่สำเร็จ", GH.friendly(err), "err");
     }).then(function () {
       btn.disabled = false;
-      btn.textContent = "เชื่อมต่อและบันทึก";
+      btn.textContent = "เชื่อมต่อและซิงก์ทั้งหมด";
     });
   });
 

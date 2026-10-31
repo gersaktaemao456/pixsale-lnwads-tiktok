@@ -355,12 +355,12 @@
     var d = document.getElementById("seoDesc").value || "คำอธิบายหน้า";
     document.getElementById("serpTitle").textContent = t;
     document.getElementById("serpDesc").textContent = d;
-    document.getElementById("serpUrl").textContent = "pixsale.app/p/?id=" + state.page.slug;
+    document.getElementById("serpUrl").textContent = S.publicBase().replace(/^https?:\/\//, "") + "/p?id=" + state.page.slug;
   }
 
   function renderPageTab() {
     document.getElementById("slugInput").value = state.page.slug;
-    document.getElementById("fullUrl").value = new URL("/p/?id=" + encodeURIComponent(state.page.slug), window.location.href).href;
+    document.getElementById("fullUrl").value = S.publicUrl(state.page.slug);
     document.getElementById("publishToggle").checked = state.page.status === "published";
     document.getElementById("publishToggle2").checked = state.page.status === "published";
     var created = new Date(state.page.createdAt);
@@ -394,7 +394,9 @@
       : '<span class="dot"></span>ฉบับร่าง';
     document.getElementById("pubLabel").textContent = state.page.status === "published" ? "เผยแพร่แล้ว" : "เผยแพร่";
     var view = document.getElementById("viewBtn");
-    view.href = "/p/?id=" + encodeURIComponent(state.page.slug) + (state.page.status === "published" ? "" : "&preview=1");
+    view.href = state.page.status === "published"
+      ? S.publicUrl(state.page.slug)
+      : "/p/?id=" + encodeURIComponent(state.page.slug) + "&preview=1";
   }
 
   function renderAll() {
@@ -854,7 +856,7 @@
     if (!on) { setPublished(false); return; }
     U.confirm({
       title: "เผยแพร่หน้านี้?",
-      message: "หน้า “" + esc(state.page.title) + "” จะพร้อมใช้งานที่ /p/?id=" + esc(state.page.slug),
+      message: "หน้า “" + esc(state.page.title) + "” จะพร้อมใช้งานที่ " + esc(S.publicUrl(state.page.slug)),
       confirmText: "เผยแพร่"
     }).then(function (ok) {
       if (!ok) { e.target.checked = false; return; }
@@ -890,7 +892,7 @@
       state.oldSlug = next;
       renderPageTab();
       renderHeader();
-      U.toast("เปลี่ยนลิงก์แล้ว", "/p/?id=" + next, "ok");
+      U.toast("เปลี่ยนลิงก์แล้ว", S.publicUrl(next), "ok");
     }).catch(function (err) {
       U.toast("เปลี่ยนลิงก์ไม่สำเร็จ", window.PIXGH.friendly(err), "err");
     });

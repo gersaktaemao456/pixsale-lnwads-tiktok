@@ -88,6 +88,14 @@
       return { owner: cfg.owner, repo: cfg.repo, branch: cfg.branch, path: cfg.path || "data" };
     },
 
+    publicBase: function () {
+      return String(P.publicBase || window.location.origin).replace(/\/+$/, "");
+    },
+
+    publicUrl: function (slug, preview) {
+      return this.publicBase() + "/p?id=" + encodeURIComponent(slug) + (preview ? "&preview=1" : "");
+    },
+
     connect: function (cfg) {
       var clean = GH.normalize(cfg);
       writeJSON(P.keys.github, clean);
@@ -341,8 +349,9 @@
       }
 
       function tryRaw(site) {
-        if (!site || !site.repo || !site.repo.owner || !site.repo.name) return Promise.resolve(null);
-        var url = "https://raw.githubusercontent.com/" + site.repo.owner + "/" + site.repo.name + "/" + (site.repo.branch || "main") + "/data/pages/" + slug + ".json";
+        var repo = (site && site.repo && site.repo.owner && site.repo.name) ? site.repo : (P.repo || null);
+        if (!repo || !repo.owner || !repo.name) return Promise.resolve(null);
+        var url = "https://raw.githubusercontent.com/" + repo.owner + "/" + repo.name + "/" + (repo.branch || "main") + "/data/pages/" + slug + ".json";
         return fetch(url + "?t=" + Date.now(), { cache: "no-store" })
           .then(function (r) { return r.ok ? r.json() : null; })
           .catch(function () { return null; });

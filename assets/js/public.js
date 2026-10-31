@@ -77,6 +77,14 @@
     return;
   }
 
+  // Old Studio links (for example the URL copied before this release) must
+  // resolve on the public storefront, not on the private team workspace.
+  var P = window.PIX || {};
+  if (window.location.hostname === "pixsale-studio.vercel.app" && !preview && P.publicBase) {
+    window.location.replace(String(P.publicBase).replace(/\/+$/, "") + "/p?id=" + encodeURIComponent(slug));
+    return;
+  }
+
   window.PIXStore.loadPublic(slug).then(function (page) {
     if (!page) {
       showError("404 / NOT FOUND", "ไม่พบหน้านี้", "ลิงก์อาจถูกเปลี่ยนชื่อ หรือหน้านี้ยังไม่ได้สร้างใน PIXSALE Studio");

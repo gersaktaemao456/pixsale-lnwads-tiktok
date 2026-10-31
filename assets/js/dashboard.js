@@ -54,7 +54,7 @@
           '<button class="dots-btn" data-menu aria-label="ตัวเลือกเพิ่มเติม">' + U.icon("dots") + "</button>" +
           '<div class="menu">' +
             '<a href="/app/editor.html?id=' + encodeURIComponent(page.slug) + '">' + U.icon("edit") + "แก้ไข</a>" +
-            (page.status === "published" ? '<a href="/p/?id=' + encodeURIComponent(page.slug) + '" target="_blank" rel="noopener">' + U.icon("eye") + "เปิดหน้าเว็บ</a>" : "") +
+            (page.status === "published" ? '<a href="' + S.publicUrl(page.slug) + '" target="_blank" rel="noopener">' + U.icon("eye") + "เปิดหน้าเว็บ</a>" : "") +
             '<button data-action="copy" data-slug="' + esc(page.slug) + '">' + U.icon("link") + "คัดลอกลิงก์</button>" +
             '<button data-action="duplicate" data-slug="' + esc(page.slug) + '">' + U.icon("copy") + "ทำสำเนา</button>" +
             '<button class="danger" data-action="delete" data-slug="' + esc(page.slug) + '">' + U.icon("trash") + "ลบหน้า</button>" +
@@ -171,7 +171,7 @@
     modal.classList.remove("open");
     document.getElementById("createForm").reset();
     slugTouched = false;
-    document.getElementById("slugPreview").textContent = "/p/?id=glow-serum";
+    document.getElementById("slugPreview").textContent = "/p?id=glow-serum";
   }
 
   document.querySelectorAll("[data-open-create]").forEach(function (b) {
@@ -191,7 +191,7 @@
     var slug = S.slugify(ascii || "");
     if (ascii) {
       slugInput.value = slug;
-      document.getElementById("slugPreview").textContent = "/p/?id=" + slug;
+      document.getElementById("slugPreview").textContent = "/p?id=" + slug;
     }
   });
 
@@ -199,7 +199,7 @@
     slugTouched = true;
     var slug = S.slugify(slugInput.value);
     slugInput.value = slug;
-    document.getElementById("slugPreview").textContent = "/p/?id=" + slug;
+    document.getElementById("slugPreview").textContent = "/p?id=" + slug;
   });
 
   document.getElementById("tplPick").addEventListener("click", function (e) {
@@ -260,7 +260,7 @@
     var action = act.getAttribute("data-action");
 
     if (action === "copy") {
-      var url = new URL("/p/?id=" + encodeURIComponent(slug), window.location.href).href;
+      var url = S.publicUrl(slug);
       U.copy(url).then(function () { U.toast("คัดลอกลิงก์แล้ว", url, "ok"); })
         .catch(function () { U.toast("คัดลอกไม่สำเร็จ", "คัดลอกลิงก์จากช่องทางอื่นแทน", "err"); });
     }
