@@ -11,8 +11,8 @@
     "font": "sans"
   },
   "seo": {
-    "title": "nt55 Studio",
-    "description": "Nt55 Studio"
+    "title": "Nt55 — ลดแรงเฉพาะวันนี้ก่อนของหมด",
+    "description": "แฟลชเซลของใช้ในบ้านจาก Nt55 — โปรจำกัดเวลา ส่งฟรี"
   },
   "stats": {
     "views": 0,
@@ -59,7 +59,7 @@
       "id": "hero_pcxprl9",
       "type": "hero",
       "props": {
-        "kicker": "แฟลชเซล 뿯½ 24 ชั่วโมง",
+        "kicker": "แฟลชเซล ⚡ 24 ชั่วโมง",
         "title": "ลดแรงเฉพาะวันนี้",
         "titleAccent": "ก่อนของหมด",
         "subtitle": "โปรโมชันจำกัดเวลา ใส่รายละเอียดสั้น ๆ ที่ทำให้ลูกค้าตัดสินใจเร็วขึ้น",
@@ -105,7 +105,7 @@
         "compareAt": 200,
         "stockLeft": 99,
         "stockTotal": 500,
-        "ctaText": "คว้าโปรนี้ 뿯½ ฿100",
+        "ctaText": "คว้าโปรนี้ ⚡ ฿100",
         "ctaUrl": "https://t.co/YR9U8A8Pca"
       }
     },
@@ -200,7 +200,7 @@
       "id": "footer_oxps67w",
       "type": "footer",
       "props": {
-        "note": "뿯½ 2026 แบรนด์ของคุณ",
+        "note": "© 2026 Nt55",
         "showBadge": true
       }
     }
