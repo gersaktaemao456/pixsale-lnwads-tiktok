@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100" role="img" aria-label="Glow serum">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f3ea"/>
+      <stop offset=".6" stop-color="#efe6d8"/>
+      <stop offset="1" stop-color="#e2d6c4"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c8ae"/>
+      <stop offset=".12" stop-color="#fbf4e6"/>
+      <stop offset=".42" stop-color="#fffdf7"/>
+      <stop offset=".7" stop-color="#eadfcb"/>
+      <stop offset="1" stop-color="#c9b899"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfbfc"/>
+      <stop offset=".35" stop-color="#b9bec6"/>
+      <stop offset=".55" stop-color="#f4f6f8"/>
+      <stop offset=".8" stop-color="#8f949c"/>
+      <stop offset="1" stop-color="#5e636a"/>
+    </linearGradient>
+    <linearGradient id="label2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e2243c"/>
+      <stop offset="1" stop-color="#9a0f21"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+
+  <rect width="900" height="1100" fill="url(#bg2)"/>
+  <circle cx="690" cy="220" r="210" fill="#fff" opacity=".5" filter="url(#soft)"/>
+  <g stroke="#cfc3ae" stroke-width="1" opacity=".55">
+    <path d="M0 275h900M0 550h900M0 825h900"/>
+    <path d="M225 0v1100M450 0v1100M675 0v1100"/>
+  </g>
+
+  <ellipse cx="450" cy="905" rx="200" ry="34" fill="#7b6a52" opacity=".22" filter="url(#soft)"/>
+
+  <g transform="translate(450 120)">
+    <rect x="-118" y="-24" width="236" height="20" rx="10" fill="#e7ddcb"/>
+    <rect x="-92" y="-96" width="184" height="86" rx="18" fill="url(#cap)"/>
+    <rect x="-92" y="-96" width="184" height="12" rx="6" fill="#fff" opacity=".55"/>
+    <rect x="-58" y="-10" width="116" height="34" fill="#dcd0ba"/>
+
+    <path d="M-138 24h276c18 0 30 14 30 32v610c0 20-14 34-34 34h-268c-20 0-34-14-34-34V56c0-18 12-32 30-32Z" fill="url(#glass)"/>
+    <path d="M-138 24h276c18 0 30 14 30 32v610c0 20-14 34-34 34h-268c-20 0-34-14-34-34V56c0-18 12-32 30-32Z" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+    <rect x="-146" y="12" width="16" height="660" rx="8" fill="#fff" opacity=".35"/>
+
+    <rect x="-172" y="250" width="344" height="250" fill="url(#label2)"/>
+    <text x="0" y="322" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" letter-spacing="7" fill="#ffd7dd">PIXSALE SKIN</text>
+    <text x="0" y="392" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="62" letter-spacing="2" fill="#fff8f3">GLOW</text>
+    <text x="0" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" letter-spacing="5" fill="#ffd7dd">SERUM 02 / 30 ML</text>
+    <text x="0" y="474" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="3" fill="#ffb9c3">NIACINAMIDE + RICE</text>
+
+    <text x="0" y="588" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" letter-spacing="4" fill="#8f7c5f">BRIGHTENING CONCENTRATE</text>
+  </g>
+
+  <text x="52" y="1040" font-family="Arial, sans-serif" font-size="14" letter-spacing="4" fill="#9c8f79">PIXSALE STUDIO — PRODUCT 02</text>
+</svg>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>แก้ไขเซลเพจ — PIXSALE Studio</title>
+<meta name="theme-color" content="#f4f2ed">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+<link rel="stylesheet" href="/assets/css/page.css">
+</head>
+<body class="app editor-mode" data-base="../">
+
+<div class="app-main">
+  <header class="editor-top">
+    <a class="icon-btn" href="/app/" aria-label="กลับไปภาพรวม">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    </a>
+    <div class="title-wrap">
+      <input class="editor-title-input" id="titleInput" aria-label="ชื่อเซลเพจ" maxlength="80">
+      <span class="tag" id="statusTag"><span class="dot"></span>ฉบับร่าง</span>
+    </div>
+    <span class="save-state" id="saveState">บันทึกแล้ว</span>
+    <div class="editor-actions">
+      <a class="btn btn-ghost btn-sm" id="viewBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+        ดูหน้าเว็บ
+      </a>
+      <label class="switch" title="เผยแพร่หน้านี้">
+        <input type="checkbox" id="publishToggle">
+        <span class="track"></span>
+        <span id="pubLabel">เผยแพร่</span>
+      </label>
+      <button class="btn btn-sm" id="saveBtn">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+        บันทึก
+      </button>
+    </div>
+  </header>
+
+  <div class="editor-grid">
+    <aside class="pane blocks-pane mobile-active" data-pane="blocks">
+      <div class="pane-head">
+        <h2>บล็อกในหน้า</h2>
+        <span class="mono" id="blockCount" style="font-size:9.5px;color:var(--muted-2)">0</span>
+      </div>
+      <div class="pane-body">
+        <div class="palette" id="palette"></div>
+        <div class="block-list" id="blockList"></div>
+      </div>
+    </aside>
+
+    <section class="pane settings-pane" data-pane="settings">
+      <div class="tabs" id="editorTabs">
+        <button class="tab active" data-tab="content">เนื้อหา</button>
+        <button class="tab" data-tab="theme">ธีม</button>
+        <button class="tab" data-tab="seo">SEO</button>
+        <button class="tab" data-tab="track">ติดตาม</button>
+        <button class="tab" data-tab="page">หน้า</button>
+      </div>
+
+      <div id="tab-content">
+        <div class="form-stack" id="blockForm"></div>
+      </div>
+
+      <div id="tab-theme" hidden>
+        <div class="form-stack">
+          <div class="form-section">
+            <div class="fs-head"><h3>สีหลักของแบรนด์</h3><span class="badge">accent</span></div>
+            <div class="swatches" id="accentSwatches"></div>
+            <div class="field">
+              <label for="accentCustom">กำหนดเอง</label>
+              <div class="inline">
+                <input type="color" id="accentCustom" class="input" style="width:52px;padding:4px" aria-label="เลือกสี">
+                <input class="input" id="accentHex" maxlength="7" placeholder="#d91e36" aria-label="ค่า HEX">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>โหมดสี</h3></div>
+            <div class="seg" id="modeSeg">
+              <button data-mode="light" class="on">สว่าง</button>
+              <button data-mode="dark">มืด</button>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>แบรนด์บนหน้า</h3></div>
+            <div class="field">
+              <label for="brandInput">ชื่อแบรนด์</label>
+              <input class="input" id="brandInput" maxlength="40" placeholder="PIXSALE Studio">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-seo" hidden>
+        <div class="form-stack">
+          <div class="form-section">
+            <div class="fs-head"><h3>ข้อมูลสำหรับแชร์</h3><span class="badge">meta</span></div>
+            <div class="field">
+              <label for="seoTitle">SEO title</label>
+              <input class="input" id="seoTitle" maxlength="70" placeholder="ชื่อหน้าที่จะแสดงบน Google">
+              <span class="hint">แนะนำไม่เกิน 60 ตัวอักษร</span>
+            </div>
+            <div class="field">
+              <label for="seoDesc">SEO description</label>
+              <textarea class="textarea" id="seoDesc" maxlength="160" placeholder="อธิบายสั้น ๆ ว่าหน้านี้ขายอะไร"></textarea>
+              <span class="hint">ไม่เกิน 160 ตัวอักษร</span>
+            </div>
+          </div>
+          <div class="form-section">
+            <div class="fs-head"><h3>ตัวอย่างผลค้นหา</h3></div>
+            <div style="border:1px solid var(--line);border-radius:8px;padding:12px;background:#fff">
+              <div style="font-size:11px;color:var(--muted);font-family:var(--font-mono)" id="serpUrl">pixsale.app/p/?id=…</div>
+              <div style="font-size:15px;color:#1a0dab;line-height:1.4;margin:2px 0" id="serpTitle">ชื่อหน้า</div>
+              <div style="font-size:11.5px;color:var(--muted);line-height:1.5" id="serpDesc">คำอธิบาย</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-page" hidden>
+        <div class="form-stack">
+          <div class="form-section">
+            <div class="fs-head"><h3>ที่อยู่หน้า</h3></div>
+            <div class="field">
+              <label for="slugInput">Slug</label>
+              <input class="input" id="slugInput" maxlength="60" pattern="[a-z0-9]+(-[a-z0-9]+)*">
+              <span class="hint">เปลี่ยนแล้วลิงก์เดิมจะใช้ไม่ได้ · ตัวอักษร a-z, 0-9, -</span>
+            </div>
+            <div class="field">
+              <label>ลิงก์เต็ม</label>
+              <div class="inline">
+                <input class="input" id="fullUrl" readonly>
+                <button class="icon-btn" id="copyUrl" type="button" aria-label="คัดลอกลิงก์">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>สถานะ</h3></div>
+            <label class="switch" style="color:var(--ink)">
+              <input type="checkbox" id="publishToggle2">
+              <span class="track"></span>
+              <span>เผยแพร่ให้ลูกค้าเห็น</span>
+            </label>
+            <span class="hint">หน้าเผยแพร่จะแสดงที่ลิงก์ด้านบนหลัง deploy บน Vercel</span>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>ข้อมูลหน้า</h3></div>
+            <div class="inline-note" id="pageMeta">—</div>
+          </div>
+
+          <div class="form-section" style="border-color:#f0cdc9;background:#fdf7f6">
+            <div class="fs-head"><h3 style="color:var(--err)">ลบหน้านี้</h3></div>
+            <p class="inline-note">ลบออกจากเครื่องและ GitHub (ถ้าเชื่อมไว้) — กู้คืนไม่ได้</p>
+            <button class="btn btn-ghost btn-sm" id="deletePage" style="align-self:flex-start;border-color:#e2b4ae;color:var(--err)">ลบเซลเพจ</button>
+          </div>
+        </div>
+      </div>
+      <div id="tab-track" hidden>
+        <div class="form-stack">
+          <div class="form-section">
+            <div class="fs-head"><h3>Facebook Pixel</h3><span class="badge">Meta</span></div>
+            <div class="field">
+              <label for="fbPixel">Facebook Pixel ID</label>
+              <input class="input" id="fbPixel" inputmode="numeric" maxlength="32" placeholder="เช่น 123456789012345" autocomplete="off">
+              <span class="hint">คัดลอกจาก Meta Events Manager → Data sources · เว้นว่างได้หากไม่ใช้</span>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>LINE Tag</h3><span class="badge">LINE</span></div>
+            <div class="field">
+              <label for="lineTag">LINE Tag / Pixel ID</label>
+              <input class="input" id="lineTag" maxlength="40" placeholder="เช่น 12345678-1234-1234-1234-123456789012" autocomplete="off">
+              <span class="hint">ใช้สำหรับวัดผลโฆษณา LINE · เว้นว่างได้</span>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>TikTok Pixel</h3><span class="badge">TikTok</span></div>
+            <div class="field">
+              <label for="ttPixel">TikTok Pixel ID</label>
+              <input class="input" id="ttPixel" maxlength="40" placeholder="เช่น CXXXXXXXXXXXXXXXXX" autocomplete="off">
+              <span class="hint">คัดลอกจาก TikTok Ads Manager → Assets → Events</span>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>TikTok Events API</h3><span class="tag tag-red">secret</span></div>
+            <div class="field">
+              <label for="ttToken">Access token</label>
+              <div class="inline">
+                <input class="input" id="ttToken" type="password" placeholder="วาง token ที่นี่ (เก็บเฉพาะเครื่องนี้)" autocomplete="off" spellcheck="false">
+                <button class="icon-btn" type="button" id="toggleTrackToken" aria-label="แสดงหรือซ่อน token">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+                </button>
+              </div>
+              <span class="hint">token จะไม่ถูกบันทึกลง JSON หรือ GitHub · สำหรับ Production ให้ตั้ง Environment Variable <b>TIKTOK_EVENTS_TOKEN</b> ใน Vercel แล้ว redeploy</span>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button type="button" class="btn btn-ghost btn-sm" id="checkEvents">ตรวจสอบ Events API</button>
+              <span class="hint" id="eventsState">ยังไม่ได้ตรวจสอบ</span>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fs-head"><h3>Custom CSS</h3><span class="badge">ขั้นสูง</span></div>
+            <div class="field">
+              <label for="customCss">สไตล์เพิ่มเติมสำหรับหน้านี้</label>
+              <textarea class="code-area" id="customCss" rows="10" spellcheck="false" placeholder=".ps-h1 { letter-spacing: -0.02em; }&#10;.ps-cta { border-radius: 14px; }"></textarea>
+              <div class="css-toolbar">
+                <span id="cssCount">0 ตัวอักษร</span>
+                <span class="spacer"></span>
+                <button type="button" data-css-example>แทรกตัวอย่าง</button>
+                <button type="button" data-css-clear>ล้าง</button>
+              </div>
+              <span class="hint">CSS ถูกจำกัดให้มีผลเฉพาะในหน้าเซลเพจ (ไม่กระทบ Studio) · ไม่รองรับ &lt;script&gt; หรือ @import</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="pane preview-pane" data-pane="preview">
+      <div class="preview-head">
+        <span class="lbl">พรีวิวสด</span>
+        <div class="right">
+          <button class="icon-btn" id="reloadPreview" style="width:30px;height:30px" aria-label="รีเฟรชพรีวิว">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 11a8 8 0 1 0-2.3 6M20 5v6h-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="preview-stage">
+        <div class="device">
+          <div class="device-screen">
+            <div class="device-notch"></div>
+            <div id="previewRoot" style="height:100%;overflow:auto"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="editor-mobile-tabs">
+    <button data-mobile="blocks" class="on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      บล็อก
+    </button>
+    <button data-mobile="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/></svg>
+      แก้ไข
+    </button>
+    <button data-mobile="preview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+      พรีวิว
+    </button>
+  </div>
+</div>
+
+<input type="file" id="imagePicker" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+<div class="toasts" aria-live="polite"></div>
+
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/github.js"></script>
+<script src="/assets/js/seed.js"></script>
+<script src="/assets/js/store.js"></script>
+<script src="/assets/js/render.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/pix-tracking.js"></script>
+<script src="/assets/js/editor.js"></script>
+<script src="/assets/js/auth.js"></script>
+</body>
+</html>

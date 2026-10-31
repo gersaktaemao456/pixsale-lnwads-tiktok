@@ -1,0 +1,103 @@
+{
+  "id": "napat-creator",
+  "slug": "napat-creator",
+  "title": "ณภัทร — ลิงก์ทั้งหมด",
+  "brand": "Napat",
+  "status": "published",
+  "template": "bio",
+  "theme": {
+    "accent": "#d91e36",
+    "mode": "dark",
+    "font": "sans"
+  },
+  "seo": {
+    "title": "ณภัทร — ของใช้ในบ้านที่ใช้จริง",
+    "description": "รวมลิงก์ร้านค้า ช่องทางติดต่อ และคลิปรีวิวของณภัทร"
+  },
+  "stats": {
+    "views": 8940,
+    "clicks": 1560
+  },
+  "tracking": {
+    "facebookPixelId": "",
+    "lineTagId": "",
+    "tiktokPixelId": ""
+  },
+  "customCss": "",
+  "createdAt": "2026-08-11T14:00:00+07:00",
+  "updatedAt": "2026-10-20T20:10:00+07:00",
+  "blocks": [
+    {
+      "id": "hero_zgf9vfp",
+      "type": "hero",
+      "props": {
+        "kicker": "ครีเอเตอร์ · กรุงเทพฯ",
+        "title": "ณภัทร",
+        "titleAccent": "ของใช้ในบ้านที่ฉันใช้จริง",
+        "subtitle": "รีวิวของใช้บ้าน ๆ แบบไม่ต้องแต่งเยอะ — ทุกชิ้นที่แนะนำคือของที่ใช้อยู่ในบ้านจริง",
+        "image": "/assets/img/avatar-1.svg",
+        "imageAlt": "ณภัทร",
+        "avatar": true,
+        "ctaText": "",
+        "ctaUrl": "",
+        "trust": [
+          "TikTok 128K",
+          "รีวิว 240 คลิป",
+          "ตอบทุกข้อความ"
+        ]
+      }
+    },
+    {
+      "id": "links_xxuvvwo",
+      "type": "links",
+      "props": {
+        "title": "ลิงก์ทั้งหมด",
+        "items": [
+          {
+            "icon": "tiktok",
+            "label": "TikTok — คลิปรีวิวล่าสุด",
+            "sub": "@napat.home",
+            "url": "https://www.tiktok.com/"
+          },
+          {
+            "icon": "shop",
+            "label": "ร้าน Shopee",
+            "sub": "ของใช้ที่รีวิวทั้งหมด",
+            "url": "https://shopee.co.th/"
+          },
+          {
+            "icon": "line",
+            "label": "LINE OA — สอบถามก่อนซื้อ",
+            "sub": "@napat.home",
+            "url": "https://line.me/"
+          },
+          {
+            "icon": "youtube",
+            "label": "YouTube — รีวิวแบบยาว",
+            "sub": "ทุกวันอาทิตย์",
+            "url": "https://www.youtube.com/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta_y8b63ne",
+      "type": "cta",
+      "props": {
+        "title": "อยากให้รีวิวสินค้า?",
+        "subtitle": "ส่งรายละเอียดสินค้าและช่วงเวลาที่ต้องการได้เลย",
+        "buttonText": "ติดต่อร่วมงาน",
+        "buttonUrl": "https://line.me/",
+        "note": "รับเฉพาะสินค้าที่ตรงกับไลฟ์สไตล์ของช่อง"
+      }
+    },
+    {
+      "id": "foot_4kpekyf",
+      "type": "footer",
+      "props": {
+        "note": "© 2026 Napat · ลิงก์ทั้งหมดในหน้าเดียว",
+        "showBadge": true
+      }
+    }
+  ]
+}

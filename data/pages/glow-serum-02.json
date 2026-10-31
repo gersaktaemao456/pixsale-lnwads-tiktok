@@ -1,0 +1,155 @@
+{
+  "id": "glow-serum-02",
+  "slug": "glow-serum-02",
+  "title": "Glow Serum 02",
+  "brand": "PIXSALE Skin",
+  "status": "draft",
+  "template": "product",
+  "theme": {
+    "accent": "#b07a3c",
+    "mode": "light",
+    "font": "sans"
+  },
+  "seo": {
+    "title": "Glow Serum 02 — ซีรั่มไนอะซินาไมด์",
+    "description": "ซีรั่มเนื้อบางเบา ผสานไนอะซินาไมด์และสารสกัดจากข้าว ช่วยให้ผิวดูเรียบเนียนและสว่างขึ้นใน 14 วัน"
+  },
+  "stats": {
+    "views": 3160,
+    "clicks": 128
+  },
+  "tracking": {
+    "facebookPixelId": "",
+    "lineTagId": "",
+    "tiktokPixelId": ""
+  },
+  "customCss": "",
+  "createdAt": "2026-10-02T11:20:00+07:00",
+  "updatedAt": "2026-10-25T09:05:00+07:00",
+  "blocks": [
+    {
+      "id": "hero_48idxcp",
+      "type": "hero",
+      "props": {
+        "kicker": "ใหม่ · เปิดตัวรอบสอง",
+        "title": "ผิวดูเรียบเนียน",
+        "titleAccent": "ขึ้นใน 14 วัน",
+        "subtitle": "ซีรั่มเนื้อบางเบา ผสานไนอะซินาไมด์ 5% และสารสกัดจากข้าวหอมมะลิ สำหรับผิวที่ต้องการความสว่างแบบไม่หนักหน้า",
+        "badge": "ใหม่",
+        "image": "/assets/img/serum.svg",
+        "imageAlt": "ขวด Glow Serum 02",
+        "ctaText": "ทดลองขนาด 30 มล.",
+        "ctaUrl": "#product",
+        "trust": [
+          "ผ่านการทดสอบโดย dermatologist",
+          "ไม่มีน้ำหอม",
+          "เหมาะกับผิวแพ้ง่าย"
+        ]
+      }
+    },
+    {
+      "id": "prod_kmqw8lw",
+      "type": "product",
+      "props": {
+        "name": "Glow Serum 02",
+        "description": "ไนอะซินาไมด์ 5% + สารสกัดข้าว · 30 มล. ใช้ได้ประมาณ 2 เดือน",
+        "image": "/assets/img/serum.svg",
+        "price": 890,
+        "compareAt": 1190,
+        "stockLeft": 34,
+        "stockTotal": 100,
+        "ctaText": "เพิ่มลงตะกร้า · ฿890",
+        "ctaUrl": "#product"
+      }
+    },
+    {
+      "id": "gal_oc0z51e",
+      "type": "gallery",
+      "props": {
+        "title": "เนื้อสัมผัสและบรรจุภัณฑ์",
+        "images": [
+          {
+            "src": "/assets/img/flatlay.svg",
+            "alt": "ภาพนิ่งขวดซีรั่มบนผ้า"
+          },
+          {
+            "src": "/assets/img/texture.svg",
+            "alt": "เนื้อครีมซีรั่ม"
+          },
+          {
+            "src": "/assets/img/serum.svg",
+            "alt": "ขวดซีรั่มระยะใกล้"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bene_w743oio",
+      "type": "benefits",
+      "props": {
+        "title": "ทำไมต้องขวดนี้",
+        "items": [
+          {
+            "icon": "spark",
+            "title": "ลดเลือนจุดด่างดำ",
+            "desc": "ไนอะซินาไมด์ช่วยปรับโทนผิวให้สม่ำเสมอเมื่อใช้ต่อเนื่อง"
+          },
+          {
+            "icon": "shield",
+            "title": "อ่อนโยนต่อผิวแพ้ง่าย",
+            "desc": "ไม่มีแอลกอฮอล์และน้ำหอม ปรับค่า pH ให้ใกล้ผิวธรรมชาติ"
+          },
+          {
+            "icon": "check",
+            "title": "ซึมไว ไม่เหนอะ",
+            "desc": "เนื้อเซรั่มบางเบา ใช้ต่อกับกันแดดหรือเมคอัพได้"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rev_0fimqob",
+      "type": "reviews",
+      "props": {
+        "title": "รีวิวจากผู้ใช้จริง",
+        "rating": 4.8,
+        "count": 96,
+        "items": [
+          {
+            "name": "อารยา ม.",
+            "text": "ใช้ครบ 2 สัปดาห์ รอยแดงจากสิวดูจางลง ชอบที่เนื้อบาง ไม่ทำให้หน้าเงา",
+            "rating": 5,
+            "avatar": "/assets/img/avatar-3.svg",
+            "verified": true
+          },
+          {
+            "name": "ธนวัฒน์ ก.",
+            "text": "ผู้ชายใช้ได้นะครับ ไม่อุดตัน ใช้ก่อนนอนแล้วตอนเช้าหน้านิ่งขึ้น",
+            "rating": 5,
+            "avatar": "/assets/img/avatar-2.svg",
+            "verified": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta_t0g8xq0",
+      "type": "cta",
+      "props": {
+        "title": "ลองขวดแรกวันนี้",
+        "subtitle": "มีตัวอย่างทดลองขนาด 5 มล. สำหรับคนที่ยังไม่แน่ใจ",
+        "buttonText": "ดูขนาดและราคา",
+        "buttonUrl": "#product",
+        "note": "ส่งฟรีเมื่อซื้อครบ ฿1,200"
+      }
+    },
+    {
+      "id": "foot_9bnaxqd",
+      "type": "footer",
+      "props": {
+        "note": "© 2026 PIXSALE Skin · เครื่องสำอาง",
+        "showBadge": true
+      }
+    }
+  ]
+}

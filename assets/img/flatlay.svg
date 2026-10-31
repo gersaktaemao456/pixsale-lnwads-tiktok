@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Serum flat lay">
+  <defs>
+    <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2ede3"/>
+      <stop offset=".55" stop-color="#e6ddcd"/>
+      <stop offset="1" stop-color="#d4c6af"/>
+    </linearGradient>
+    <linearGradient id="glass3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cbb894"/>
+      <stop offset=".2" stop-color="#fff9ec"/>
+      <stop offset=".5" stop-color="#fffdf8"/>
+      <stop offset=".8" stop-color="#dfd0b6"/>
+      <stop offset="1" stop-color="#b9a37c"/>
+    </linearGradient>
+    <linearGradient id="cap3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f9fafb"/><stop offset=".4" stop-color="#a9aeb6"/>
+      <stop offset=".6" stop-color="#eef0f2"/><stop offset="1" stop-color="#6d727a"/>
+    </linearGradient>
+    <filter id="sh"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#cloth)"/>
+  <path d="M0 520c220-40 340 60 560 20s380-100 640-40v300H0Z" fill="#e0d4c0" opacity=".65"/>
+  <path d="M0 640c260-30 420 40 700 0s320-40 500-10v170H0Z" fill="#cdbda3" opacity=".5"/>
+  <ellipse cx="600" cy="600" rx="250" ry="40" fill="#8d7757" opacity=".25" filter="url(#sh)"/>
+
+  <g transform="translate(600 520) rotate(-8)">
+    <rect x="-70" y="-330" width="140" height="60" rx="14" fill="url(#cap3)"/>
+    <rect x="-46" y="-276" width="92" height="26" fill="#ded0b8"/>
+    <rect x="-112" y="-254" width="224" height="330" rx="34" fill="url(#glass3)"/>
+    <rect x="-112" y="-120" width="224" height="96" fill="#d91e36"/>
+    <text x="0" y="-78" text-anchor="middle" font-family="Arial Black, Arial" font-size="30" fill="#fff">GLOW 02</text>
+    <text x="0" y="-52" text-anchor="middle" font-family="Arial" font-size="9" letter-spacing="3" fill="#ffc9d2">SERUM / 30 ML</text>
+  </g>
+  <g transform="translate(880 590) rotate(14)">
+    <rect width="150" height="26" rx="8" fill="#e9dfcd"/>
+    <rect y="26" width="150" height="8" fill="#d8cab2"/>
+  </g>
+  <g transform="translate(170 210)">
+    <circle r="54" fill="#f7f1e4"/>
+    <circle r="30" fill="#e2d4bd"/>
+  </g>
+  <text x="56" y="744" font-family="Arial" font-size="14" letter-spacing="4" fill="#8f7c5f">PIXSALE STUDIO — FLATLAY 02</text>
+</svg>

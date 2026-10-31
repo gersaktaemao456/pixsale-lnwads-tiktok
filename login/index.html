@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เข้าสู่ระบบ — PIXSALE</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4f2ed">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/auth.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="grain">
+
+<div class="auth-page">
+  <aside class="auth-aside">
+    <a class="auth-brand" href="/">
+      <img src="/assets/brand/logo.svg" alt="">
+      <span class="wordmark">PIX<b>SALE</b></span>
+      <span class="brand-dot"></span>
+    </a>
+    <h1>พื้นที่ทำงานของคุณ<br>เปิดเฉพาะ<em>ผู้มีสิทธิ์</em></h1>
+    <ul class="points">
+      <li><b>01</b>ล็อกอินด้วยรหัสเข้าใช้งานและรหัสผ่านที่ได้รับ</li>
+      <li><b>02</b>ทุกเซลเพจยังเก็บใน GitHub ของคุณ</li>
+      <li><b>03</b>สิทธิ์มีวันหมดอายุ ต่ออายุได้ทุกเมื่อ</li>
+    </ul>
+    <div class="auth-foot">PIXSALE — MEMBER ACCESS · 2026</div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <p class="eyebrow">Member access</p>
+      <h2>เข้าสู่พื้นที่ทำงาน</h2>
+      <p class="intro">ใช้รหัสเข้าใช้งาน (License key) และรหัสผ่านที่ผู้ดูแลออกให้คุณ — ข้อมูลจะถูกตรวจสอบก่อนเปิด Studio</p>
+
+      <form class="auth-form" id="loginForm">
+        <div class="field">
+          <label for="licenseKey">รหัสเข้าใช้งาน (License key)</label>
+          <textarea class="textarea" id="licenseKey" rows="3" placeholder="PX1.…" autocomplete="off" spellcheck="false" required></textarea>
+        </div>
+        <div class="field">
+          <label for="password">รหัสผ่าน</label>
+          <input class="input" id="password" type="password" placeholder="รหัสผ่านที่ได้รับ" autocomplete="current-password" required>
+        </div>
+        <div class="auth-error" id="loginError" role="alert"></div>
+        <button class="btn btn-accent btn-block auth-submit" type="submit" id="loginBtn">เข้าสู่ Studio</button>
+      </form>
+
+      <div class="auth-note" id="setupNote" hidden>
+        <b>ระบบสมาชิกยังไม่เปิดใช้งานบนเซิร์ฟเวอร์นี้</b><br>
+        ผู้ดูแลต้องตั้งค่า <span class="code-inline">AUTH_SECRET</span> และ <span class="code-inline">ADMIN_PASSWORD</span> ใน Vercel ก่อน
+      </div>
+
+      <div class="auth-links">
+        <a href="/">← กลับหน้าแรก</a>
+        <a href="/admin">Back Office</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="/assets/js/login.js"></script>
+</body>
+</html>

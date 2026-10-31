@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>คู่มือเริ่มต้น — PIXSALE</title>
+<meta name="description" content="วิธีสร้างเซลเพจ เชื่อม GitHub และ deploy ขึ้น Vercel ด้วย PIXSALE">
+<meta name="theme-color" content="#f4f2ed">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="site grain" data-base="../">
+
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/">
+      <img src="/assets/brand/logo.svg" alt="" width="30" height="30">
+      <span class="wordmark">PIX<b>SALE</b></span>
+      <span class="brand-dot"></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#why">ทำไมต้อง PIXSALE</a>
+      <a href="/#features">ฟีเจอร์</a>
+      <a href="/#pricing">ราคา</a>
+      <a href="/docs/" aria-current="page">คู่มือ</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-gh" href="/app/">Studio
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <a class="btn btn-sm" href="/app/">เปิดแอป</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="เปิดเมนู" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">หน้าแรก <span>01</span></a>
+  <a href="/app/">Studio <span>02</span></a>
+  <a href="#github">GitHub <span>03</span></a>
+  <a href="#vercel">Vercel <span>04</span></a>
+  <a class="btn btn-block" href="/app/">เปิดแอป</a>
+</div>
+
+<main>
+  <section class="doc-hero">
+    <div class="wrap">
+      <p class="eyebrow">Documentation · v1.0</p>
+      <h1>จากหน้าว่าง<br>ถึงลิงก์ที่แชร์ได้</h1>
+      <p>คู่มือนี้พาคุณตั้งแต่สร้างเซลเพจแรก เชื่อม GitHub repository ของตัวเอง ไปจนถึงการ deploy บน Vercel — ทุกขั้นตอนใช้เวลาไม่ถึง 10 นาที</p>
+    </div>
+  </section>
+
+  <div class="wrap doc-layout">
+    <nav class="doc-nav" aria-label="สารบัญ">
+      <a href="#overview">ภาพรวม</a>
+      <a href="#start">เริ่มต้นใช้งาน</a>
+      <a href="#github">เชื่อม GitHub</a>
+      <a href="#vercel">Deploy บน Vercel</a>
+      <a href="#edit">แก้ไขและปรับแต่ง</a>
+      <a href="#schema">โครงสร้างข้อมูล</a>
+      <a href="#security">ความปลอดภัย</a>
+      <a href="#trouble">แก้ปัญหาเบื้องต้น</a>
+    </nav>
+
+    <article class="doc-body">
+      <h2 id="overview">ภาพรวม</h2>
+      <p>PIXSALE เป็นเว็บแอปแบบ static ทั้งหมด — ไม่มีเซิร์ฟเวอร์หลังบ้าน ไม่มีฐานข้อมูลกลาง ข้อมูลของแต่ละร้านอยู่ในสองที่:</p>
+      <ul>
+        <li><b>เบราว์เซอร์ของคุณ</b> — สำเนาทำงานที่แก้ไขได้ทันที (localStorage)</li>
+        <li><b>GitHub repository ของคุณ</b> — ไฟล์ JSON จริงที่ใช้เผยแพร่และสำรองข้อมูล</li>
+      </ul>
+      <p>เมื่อ deploy บน Vercel ตัวเว็บจะอ่านไฟล์จาก <code>data/pages/*.json</code> ในโปรเจกต์ และสามารถอ่านเวอร์ชันล่าสุดจาก GitHub ผ่าน raw URL ได้โดยไม่ต้อง deploy ใหม่ทุกครั้งที่แก้หน้า</p>
+
+      <div class="callout"><b>สิ่งที่ต้องมี:</b> บัญชี GitHub (ฟรี) และบัญชี Vercel (ฟรี) — ไม่ต้องใช้บัตรเครดิตสำหรับการเริ่มต้น</div>
+
+      <h3>โครงสร้างไฟล์</h3>
+      <pre><code>pixsale-lnwads-tiktok/
+├─ index.html            หน้าแบรนด์
+├─ app/
+│  ├─ index.html         แดชบอร์ด
+│  ├─ editor.html        ตัวแก้ไขเซลเพจ
+│  └─ settings.html      ตั้งค่า + เชื่อม GitHub
+├─ p/index.html          หน้าซลเพจที่เผยแพร่
+├─ docs/index.html       คู่มือนี้
+├─ assets/
+│  ├─ css/               tokens, site, app, page
+│  ├─ js/                store, github, render, editor…
+│  ├─ img/               รูปสินค้าและ avatar ตัวอย่าง
+│  └─ brand/             logo และ favicon
+├─ data/
+│  ├─ site.json          ข้อมูล repo สำหรับหน้า สาธารณะ
+│  └─ pages/*.json       เซลเพจแต่ละหน้า
+├─ vercel.json
+└─ README.md</code></pre>
+
+      <h2 id="start">เริ่มต้นใช้งาน</h2>
+      <ol>
+        <li>เปิด <a href="/app/">PIXSALE Studio</a> — ระบบจะสร้างข้อมูลตัวอย่าง 3 หน้าให้อัตโนมัติ</li>
+        <li>กด <b>สร้างเซลเพจ</b> เลือกเทมเพลต แล้วตั้งชื่อและ slug</li>
+        <li>แก้ข้อความ เพิ่มบล็อก และเลือกสีแบรนด์ในแท็บ <b>ธีม</b></li>
+        <li>กด <b>บันทึก</b> — ถ้ายังไม่เชื่อม GitHub ข้อมูลจะอยู่ในเบราว์เซอร์เครื่องนี้</li>
+        <li>เปิดสวิตช์ <b>เผยแพร่</b> เมื่อพร้อมให้ลูกค้าเห็น</li>
+      </ol>
+      <div class="callout"><b>หมายเหตุ:</b> การเผยแพร่ในเครื่องจะทำให้หน้าแสดงที่ <code>/p/?id=slug</code> บนเครื่องของคุณเท่านั้น หากต้องการลิงก์จริงบนอินเทอร์เน็ต ต้อง deploy ขึ้น Vercel ก่อน</div>
+
+      <h2 id="github">เชื่อม GitHub</h2>
+      <p>การเชื่อม GitHub ทำให้ทุกหน้าเก็บเป็นไฟล์ JSON ใน repo ของคุณ และมีประวัติการแก้ไขย้อนหลังทุกครั้ง</p>
+
+      <h3>1. สร้าง repository</h3>
+      <ol>
+        <li>ไปที่ <a href="https://github.com/new" target="_blank" rel="noopener">github.com/new</a></li>
+        <li>ตั้งชื่อ <code>pixsale-lnwads-tiktok</code></li>
+        <li>เลือก <b>Public</b> — จำเป็นสำหรับให้หน้าเว็บอ่านข้อมูลโดยไม่ต้องใช้ token</li>
+        <li>ไม่ต้องติ๊ก README, .gitignore หรือ license</li>
+        <li>กด <b>Create repository</b></li>
+      </ol>
+
+      <h3>2. สร้าง fine-grained token</h3>
+      <ol>
+        <li>ไปที่ <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Personal access tokens → Fine-grained tokens</a></li>
+        <li>ตั้งชื่อ เช่น <code>pixsale-studio</code> และเลือกวันหมดอายุ</li>
+        <li>ที่ <b>Repository access</b> เลือก <b>Only select repositories</b> แล้วเลือก repo ที่สร้างไว้</li>
+        <li>ที่ <b>Permissions → Repository permissions → Contents</b> เลือก <b>Read and write</b></li>
+        <li>กด <b>Generate token</b> แล้วคัดลอกค่า <code>github_pat_…</code></li>
+      </ol>
+      <div class="callout"><b>สำคัญ:</b> token ถูกเก็บใน localStorage ของเบราว์เซอร์คุณเท่านั้น ไม่ถูกเขียนลงไฟล์ ไม่ถูก commit และไม่ถูกส่งไปยังเซิร์ฟเวอร์ใด ๆ นอกจาก api.github.com</div>
+
+      <h3>3. เชื่อมในแอป</h3>
+      <ol>
+        <li>เปิด <a href="/app/settings.html#github">ตั้งค่า → GitHub repository</a></li>
+        <li>กรอก owner (ชื่อผู้ใช้ GitHub), repo, branch (<code>main</code>) และ token</li>
+        <li>กด <b>ทดสอบการเชื่อมต่อ</b> แล้วจึงกด <b>เชื่อมต่อและบันทึก</b></li>
+        <li>ไปที่ <b>ซิงก์ข้อมูล</b> กด <b>อัปโหลดทุกหน้าขึ้น GitHub</b></li>
+      </ol>
+      <p>ไฟล์จะถูกเขียนที่:</p>
+      <pre><code>data/site.json
+data/pages/{slug}.json</code></pre>
+
+      <h2 id="vercel">Deploy บน Vercel</h2>
+      <p>โปรเจกต์นี้เป็น static site ล้วน ไม่มีขั้นตอน build จึงใช้เวลาน้อยกว่า 1 นาที</p>
+      <ol>
+        <li>ไปที่ <a href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a> แล้วเข้าสู่ระบบด้วย GitHub</li>
+        <li>เลือก repo <code>pixsale-lnwads-tiktok</code> → <b>Import</b></li>
+        <li>Framework Preset: <b>Other</b> · Build Command: เว้นว่าง · Output Directory: <code>.</code></li>
+        <li>กด <b>Deploy</b> — จะได้ URL เช่น <code>pixsale-lnwads-tiktok.vercel.app</code></li>
+        <li>ทุกครั้งที่ push ไฟล์ใหม่ Vercel จะ deploy ให้อัตโนมัติ</li>
+      </ol>
+
+      <h3>ผูกโดเมนของคุณเอง</h3>
+      <p>ใน Vercel ไปที่ Project → <b>Settings → Domains</b> แล้วเพิ่มโดเมน จากนั้นตั้งค่า DNS ตามที่ Vercel แนะนำ (A record หรือ CNAME)</p>
+
+      <div class="callout"><b>หลัง deploy:</b> เปิด <code>/app/settings.html</code> บนโดเมนจริง แล้วเชื่อม GitHub อีกครั้งหากต้องการให้หน้านี้เขียนข้อมูลกลับ repo จากอุปกรณ์อื่นได้ — token ไม่ถูกส่งต่อระหว่างเบราว์เซอร์</div>
+
+      <h2 id="edit">แก้ไขและปรับแต่ง</h2>
+      <h3>แก้ข้อความและราคา</h3>
+      <p>ทำได้ในหน้า <b>แก้ไข</b> ทั้งหมด — เลือกบล็อกทางซ้าย แก้ในแท็บ “เนื้อหา” พรีวิวทางขวาจะอัปเดตทันที</p>
+
+      <h3>เปลี่ยนสี ฟอนต์ โหมดสว่าง/มืด</h3>
+      <p>แท็บ <b>ธีม</b> มีสีหลัก 6 สีพร้อมใช้ และช่องกำหนดสีเอง (HEX) เปลี่ยนโหมดเป็น dark ได้ทั้งหน้า โดยสีพื้นและตัวอักษรจะปรับอัตโนมัติ</p>
+
+      <h3>เพิ่มบล็อกใหม่</h3>
+      <p>บล็อกที่มีให้ใช้: ฮีโร่, สินค้า, จุดเด่น, แกลเลอรี, รีวิว, นับถอยหลัง, คำถาม, ลิงก์, ปิดการขาย และฟุตเตอร์ — ทั้งหมดเรียงลำดับได้ด้วยปุ่มลูกศรในรายการบล็อก</p>
+
+      <h3>แก้โค้ดหรือสไตล์</h3>
+      <ul>
+        <li>สีและฟอนต์ทั้งระบบ: <code>assets/css/tokens.css</code></li>
+        <li>หน้าตาเซลเพจ: <code>assets/css/page.css</code></li>
+        <li>หน้าแบรนด์: <code>assets/css/site.css</code></li>
+        <li>ตัวเรนเดอร์บล็อก: <code>assets/js/render.js</code></li>
+      </ul>
+
+      <h2 id="schema">โครงสร้างข้อมูล</h2>
+      <p>หนึ่งหน้าเท่ากับหนึ่งไฟล์ JSON ตัวอย่าง:</p>
+      <pre><code>{
+  "id": "tiktok-shop-starter-kit",
+  "slug": "tiktok-shop-starter-kit",
+  "title": "TikTok Shop Starter Kit",
+  "brand": "PIXSALE Studio",
+  "status": "published",
+  "theme": { "accent": "#d91e36", "mode": "light", "font": "sans" },
+  "seo": { "title": "…", "description": "…" },
+  "stats": { "views": 12480, "clicks": 842 },
+  "blocks": [
+    { "id": "hero_x1", "type": "hero", "props": { "title": "…" } },
+    { "id": "prod_x2", "type": "product", "props": { "price": 690 } }
+  ]
+}</code></pre>
+      <p>ฟิลด์ที่สำคัญ:</p>
+      <ul>
+        <li><code>slug</code> — ใช้ใน URL และเป็นชื่อไฟล์ ต้องเป็น a-z, 0-9 และ -</li>
+        <li><code>status</code> — <code>published</code> หรือ <code>draft</code></li>
+        <li><code>theme.accent</code> — สีหลักของหน้านั้น</li>
+        <li><code>blocks[].props</code> — เนื้อหาของแต่ละบล็อก</li>
+      </ul>
+
+      <h2 id="security">ความปลอดภัย</h2>
+      <ul>
+        <li>ใช้ fine-grained token ที่จำกัดเฉพาะ repo เดียว และสิทธิ์ Contents: Read and write</li>
+        <li>ตั้งวันหมดอายุ token และหมุนเวียนเป็นประจำ</li>
+        <li>อย่า commit token ลงไฟล์หรือ screenshot หน้า settings</li>
+        <li>หาก token รั่ว ให้ revoke ที่ GitHub แล้วสร้างใหม่ทันที</li>
+        <li>ข้อมูลหน้าเว็บเป็น HTML/JSON สาธารณะ — อย่าใส่ข้อมูลลูกค้าที่ละเอียดอ่อนในเซลเพจ</li>
+      </ul>
+
+      <h2 id="trouble">แก้ปัญหาเบื้องต้น</h2>
+      <h3>เชื่อมต่อไม่ได้ (401 / 403)</h3>
+      <p>ตรวจว่า token ยังไม่หมดอายุ และให้สิทธิ์ <b>Contents: Read and write</b> กับ repo นั้นจริง ๆ</p>
+
+      <h3>บันทึกแล้วแต่ไฟล์ไม่ขึ้น GitHub</h3>
+      <p>ตรวจ branch ว่าเป็น <code>main</code> หรือชื่อที่ repo ใช้จริง และ path เริ่มที่ <code>data</code> — ถ้า repo ว่าง ระบบจะสร้างไฟล์แรกให้อัตโนมัติ</p>
+
+      <h3>หน้าเว็บขึ้น 404</h3>
+      <p>ตรวจว่า <code>status</code> เป็น <code>published</code> และ slug ใน URL ตรงกับชื่อไฟล์ใน <code>data/pages</code></p>
+
+      <h3>หน้าโหลดข้อมูลเก่าหลังแก้</h3>
+      <p>raw.githubusercontent.com มีแคชประมาณ 5 นาที — รอสักครู่แล้ว refresh หรือ deploy ใหม่</p>
+
+      <p style="margin-top:34px"><a class="btn btn-ghost" href="/app/">กลับไปที่ Studio</a></p>
+    </article>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/">
+          <img src="/assets/brand/logo.svg" alt="" width="30" height="30">
+          <span class="wordmark">PIX<b>SALE</b></span>
+        </a>
+        <p>สตูดิโอเซลเพจสำหรับคนขายบน TikTok ข้อมูลเป็นของคุณ โฮสต์บน Vercel</p>
+      </div>
+      <div class="foot-col"><h4>ผลิตภัณฑ์</h4><a href="/app/">แอปพลิเคชัน</a><a href="/p/?id=tiktok-shop-starter-kit">หน้าตัวอย่าง</a><a href="/#pricing">ราคา</a></div>
+      <div class="foot-col"><h4>แหล่งข้อมูล</h4><a href="/docs/">คู่มือเริ่มต้น</a><a href="#github">เชื่อม GitHub</a><a href="#vercel">Deploy บน Vercel</a></div>
+      <div class="foot-col"><h4>สถานะ</h4><a href="/app/settings.html">ตั้งค่าร้าน</a><a href="#schema">โครงสร้างข้อมูล</a></div>
+      <div class="foot-col"><h4>ติดต่อ</h4><a href="https://line.me/ti/p/~@932iqmdj" target="_blank" rel="noopener">LINE @932iqmdj</a><a href="/login">เข้าสู่ระบบ</a><a href="/admin">Back Office</a></div>
+    </div>
+    <div class="foot-word" aria-hidden="true">PIXSALE</div>
+    <div class="foot-bottom">
+      <span>© 2026 PIXSALE — MOBILE-FIRST COMMERCE PAGES</span>
+      <span class="stack"><span>GitHub-native</span><span>·</span><span>Vercel-ready</span><span>·</span><span>ไม่ติดตามคุณ</span></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Back Office — PIXSALE Admin</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4f2ed">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/auth.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="admin-page grain">
+
+<header class="admin-top">
+  <a class="auth-brand" href="/">
+    <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
+    <span class="wordmark">PIX<b>SALE</b></span>
+    <span class="brand-dot"></span>
+  </a>
+  <span class="tag">Back Office</span>
+  <div class="spacer"></div>
+  <a class="nav-gh" href="/" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--muted)">กลับเว็บไซต์</a>
+  <button class="btn btn-ghost btn-sm" id="adminLogout" hidden>ออกจากระบบ</button>
+</header>
+
+<div class="admin-login-wrap" id="loginView">
+  <div class="admin-login">
+    <p class="eyebrow">Back Office login</p>
+    <h2 style="font-family:var(--font-display);font-size:32px;font-weight:300;letter-spacing:-.02em;margin:10px 0 8px">จัดการสิทธิ์การใช้งาน</h2>
+    <p class="intro" style="font-size:13px;line-height:1.75;color:var(--muted);margin-bottom:20px">ออก username / password / license key ให้ลูกค้า และกำหนดวันหมดอายุ</p>
+
+    <div class="admin-setup" id="setupBox" hidden>
+      <b>ยังไม่ได้ตั้งค่าฝั่งเซิร์ฟเวอร์</b><br>
+      เพิ่ม Environment Variables ใน Vercel แล้ว redeploy:
+      <div style="margin:8px 0"><code>AUTH_SECRET</code> — สุ่ม 32 ไบต์</div>
+      <div style="margin:8px 0"><code>ADMIN_PASSWORD</code> — รหัสผ่านผู้ดูแลที่คุณตั้งเอง</div>
+      <div class="admin-actions">
+        <button class="btn btn-ghost btn-sm" id="genSecret" type="button">สร้าง AUTH_SECRET แล้วคัดลอก</button>
+        <a class="btn btn-ghost btn-sm" href="https://vercel.com/fin69s-projects/pixsale-lnwads-tiktok/settings/environment-variables" target="_blank" rel="noopener">เปิดหน้าตั้งค่า Vercel</a>
+      </div>
+      <span class="hint" id="genSecretOut" style="display:block;margin-top:8px"></span>
+    </div>
+
+    <form class="auth-form" id="adminLoginForm">
+      <div class="field">
+        <label for="adminPassword">รหัสผ่านผู้ดูแล</label>
+        <input class="input" id="adminPassword" type="password" autocomplete="current-password" placeholder="ADMIN_PASSWORD" required>
+      </div>
+      <div class="auth-error" id="adminLoginError" role="alert"></div>
+      <button class="btn btn-accent btn-block" type="submit" id="adminLoginBtn">เข้าสู่โหมดผู้ดูแล</button>
+    </form>
+
+    <div class="auth-links">
+      <a href="/">← กลับหน้าแรก</a>
+      <a href="/login">หน้าล็อกอินลูกค้า</a>
+    </div>
+  </div>
+</div>
+
+<main class="admin-body" id="adminView" hidden>
+  <div class="admin-head">
+    <div>
+      <p class="eyebrow">Admin panel</p>
+      <h1>สิทธิ์การใช้งาน</h1>
+      <p>ออก license key ให้ลูกค้า — แต่ละใบผูกกับ password และวันหมดอายุ</p>
+    </div>
+    <span class="tag tag-ok" id="adminStatus"><span class="dot"></span>พร้อมใช้งาน</span>
+  </div>
+
+  <div class="admin-grid">
+    <section class="admin-card">
+      <div class="admin-card-head"><h2>ออกสิทธิ์ใหม่</h2><span class="tag">License</span></div>
+      <div class="admin-card-body">
+        <form class="auth-form" id="issueForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="plan">แพ็กเกจ</label>
+              <select class="select" id="plan">
+                <option value="starter">Starter — 1 หน้า</option>
+                <option value="pro" selected>Pro — 10 หน้า</option>
+                <option value="studio">Studio — ไม่จำกัด</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="days">อายุสิทธิ์</label>
+              <select class="select" id="days">
+                <option value="30" selected>30 วัน</option>
+                <option value="90">90 วัน</option>
+                <option value="180">180 วัน</option>
+                <option value="365">365 วัน</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="newUsername">Username (เว้นว่างเพื่อสุ่ม)</label>
+            <input class="input" id="newUsername" placeholder="pix-customer" maxlength="32" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="field">
+            <label for="newPassword">Password (เว้นว่างเพื่อสุ่ม 12 ตัว)</label>
+            <input class="input" id="newPassword" placeholder="อย่างน้อย 8 ตัวอักษร" autocomplete="new-password">
+          </div>
+          <div class="auth-error" id="issueError" role="alert"></div>
+          <button class="btn btn-accent btn-block" type="submit" id="issueBtn">สร้างสิทธิ์การใช้งาน</button>
+        </form>
+
+        <div class="admin-result" id="issueResult">
+          <h3>ออกสิทธิ์สำเร็จ — ส่งข้อมูลนี้ให้ลูกค้า</h3>
+          <div class="cred-row"><span class="k">Username</span><span class="v" id="rUser"></span><button type="button" data-copy-target="rUser" aria-label="คัดลอก username"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+          <div class="cred-row"><span class="k">Password</span><span class="v" id="rPass"></span><button type="button" data-copy-target="rPass" aria-label="คัดลอก password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+          <div class="cred-row"><span class="k">Plan</span><span class="v" id="rPlan"></span></div>
+          <div class="cred-row"><span class="k">หมดอายุ</span><span class="v" id="rExp"></span></div>
+          <div class="cred-row"><span class="k">License key</span><span class="v key" id="rKey"></span><button type="button" data-copy-target="rKey" aria-label="คัดลอก license key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+          <div class="admin-actions">
+            <button class="btn btn-sm" type="button" id="downloadCred">ดาวน์โหลดใบรับสิทธิ์</button>
+            <button class="btn btn-ghost btn-sm" type="button" id="copyAllCred">คัดลอกทั้งหมด</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <div class="admin-card-head">
+        <h2>ออกในเครื่องนี้</h2>
+        <button class="btn btn-quiet btn-sm" type="button" id="clearIssued" style="font-size:11px;color:var(--muted)">ล้างประวัติ</button>
+      </div>
+      <div class="admin-card-body">
+        <table class="admin-table">
+          <thead><tr><th>Username</th><th>Plan</th><th>หมดอายุ</th><th>Key</th></tr></thead>
+          <tbody id="issuedBody"></tbody>
+        </table>
+        <p class="hint">เก็บเฉพาะ username / plan / key — ไม่เก็บ password ในเครื่องนี้</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="toasts" aria-live="polite"></div>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/admin.js"></script>
+</body>
+</html>

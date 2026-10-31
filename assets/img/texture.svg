@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img" aria-label="Cream texture">
+  <defs>
+    <radialGradient id="creme" cx=".42" cy=".38" r=".75">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset=".45" stop-color="#f6eddd"/>
+      <stop offset=".78" stop-color="#e6d7bf"/>
+      <stop offset="1" stop-color="#cdb995"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="900" height="900" fill="#efe6d6"/>
+  <circle cx="470" cy="430" r="330" fill="url(#creme)"/>
+  <g filter="url(#blur)" opacity=".9">
+    <ellipse cx="330" cy="300" rx="150" ry="96" fill="#fffaf0" transform="rotate(-18 330 300)"/>
+    <ellipse cx="590" cy="560" rx="190" ry="120" fill="#f3e8d4" transform="rotate(14 590 560)"/>
+    <ellipse cx="520" cy="240" rx="110" ry="60" fill="#fffdf8" transform="rotate(24 520 240)"/>
+  </g>
+  <path d="M120 640c120-60 180 30 300-10s150-130 300-90" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+  <rect width="900" height="900" filter="url(#grain)" opacity=".5"/>
+  <text x="56" y="840" font-family="Arial, sans-serif" font-size="14" letter-spacing="4" fill="#a38f6d">GLOW 02 — TEXTURE</text>
+</svg>

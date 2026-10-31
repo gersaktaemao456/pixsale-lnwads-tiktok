@@ -1,0 +1,14 @@
+{
+  "name": "pixsale-lnwads-tiktok",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PIXSALE — mobile-first sales page studio for TikTok sellers. Static site, GitHub-backed data, Vercel-ready.",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "start": "node scripts/serve.js",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
