@@ -80,7 +80,10 @@
   // Old Studio links (for example the URL copied before this release) must
   // resolve on the public storefront, not on the private team workspace.
   var P = window.PIX || {};
-  if (window.location.hostname === "pixsale-studio.vercel.app" && !preview && P.publicBase) {
+  // Keep a locally edited page on the Studio origin for its owner; visitors
+  // have no local copy and are sent to the public storefront instead.
+  var localCopy = window.PIXStore && window.PIXStore.getStored ? window.PIXStore.getStored(slug) : null;
+  if (window.location.hostname === "pixsale-studio.vercel.app" && !preview && P.publicBase && !localCopy) {
     window.location.replace(String(P.publicBase).replace(/\/+$/, "") + "/p?id=" + encodeURIComponent(slug));
     return;
   }
